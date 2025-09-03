@@ -10,11 +10,11 @@
     <link rel="stylesheet" href="css/love.css">
 </head>
 
-
 <body>
 
-    <audio autoplay="autopaly" loop="loop" id="audios" preload="auto">
-        <source src="MP3/1.mp3" />
+    <!-- Áudio configurado para autoplay com mute inicial -->
+    <audio autoplay loop muted id="audios" preload="auto">
+        <source src="MP3/1.mp3" type="audio/mpeg">
     </audio>
 
     <div class="container" onselectstart="return false;" unselectable="on" style="-moz-user-select:none;">
@@ -42,6 +42,16 @@
 
     <script type="text/javascript" src="js/love.js"></script>
 
-</body>
+    <!-- Script para tentar tocar o áudio automaticamente -->
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            const audio = document.getElementById("audios");
+            audio.muted = false; // remove o mute
+            audio.play().catch(err => {
+                console.log("Autoplay bloqueado pelo navegador, interaja para tocar o som:", err);
+            });
+        });
+    </script>
 
+</body>
 </html>
